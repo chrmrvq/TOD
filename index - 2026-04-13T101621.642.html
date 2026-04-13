@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tuban Oto Driving (TOD) - Kursus Mengemudi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pendaftaran Kursus Mengemudi Tuban Oto Driving via WhatsApp"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Brand Colors based on TOD Logo */
+      --navy: #1e293b;         
+      --navy-light: #334155;
+      --red-tod: #dc2626;      
+      --red-hover: #b91c1c;
+      --gold: #f59e0b;
+      --gray-badge: #94a3b8;
+      
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      
+      --radius-md: 16px;
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--background);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* NAVIGATION */
+    .top-nav {
+      background: var(--surface);
+      padding: 12px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-small {
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: 1px;
+    }
+
+    /* HERO SECTION with Gradient */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, #451a24 50%, var(--red-tod) 100%);
+      color: white;
+      border-bottom: 5px solid var(--gold);
+    }
+
+    .brand-logo-large {
+      height: 150px;
+      object-fit: contain;
+      margin: 0 auto 20px auto;
+      display: block;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 18px;
+    }
+
+    /* CONTAINER & SECTIONS */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .category-section { margin-bottom: 60px; }
+
+    .category-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .vehicle-img {
+      width: 100%;          
+      max-width: 300px;     
+      height: auto;         
+      object-fit: contain;
+      margin-bottom: -100px;
+      position: relative;
+      z-index: 1;  
+    }
+
+    .category-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 8px;
+    }
+
+    .category-header p {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    /* SUB-SECTION TITLE */
+    .sub-section-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy-light);
+      margin-bottom: 30px;
+      background: #f1f5f9;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* GRID & CARDS (DESKTOP DEFAULT) */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--red-tod);
+    }
+
+    /* Ribbon/Badge */
+    .ribbon {
+      position: absolute;
+      top: 15px;
+      right: -35px;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 5px 40px;
+      font-size: 12px;
+      font-weight: 800;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      text-align: center;
+    }
+    
+    .ribbon.green { background: #10b981; color: white; }
+    .ribbon.gray { background: var(--gray-badge); color: white; }
+
+    .card-content {
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      color: var(--red-tod);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .price-tag { margin-bottom: 20px; }
+    .price-tag .amount {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 30px;
+      flex-grow: 1;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .feature-list li::before {
+      content: "✔";
+      color: var(--red-tod);
+      font-weight: bold;
+    }
+
+    /* BUTTONS */
+    .select-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-family: inherit;
+    }
+
+    .select-btn:hover { background: var(--navy-light); }
+    
+    .select-btn.highlight {
+      background: var(--red-tod);
+    }
+    .select-btn.highlight:hover {
+      background: var(--red-hover);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.7); 
+      backdrop-filter: blur(5px);
+      display: none; justify-content: center; align-items: center;
+      z-index: 999; opacity: 0; transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    
+    .modal-content {
+      background: var(--surface); padding: 32px; border-radius: var(--radius-md); 
+      width: 100%; max-width: 420px; position: relative; 
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    
+    .close-modal {
+      position: absolute; top: 16px; right: 20px; font-size: 28px; color: var(--text-muted); cursor: pointer;
+    }
+    
+    .input-wrapper { margin-bottom: 20px; }
+    .input-wrapper label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+    .input-wrapper input {
+      width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; 
+      font-size: 16px; font-family: inherit;
+    }
+    
+    .wa-btn {
+      width: 100%; padding: 16px; background: #25D366; color: white; border: none; border-radius: 8px; 
+      font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+
+    footer { text-align: center; padding: 30px; color: var(--text-muted); background: var(--navy); color: white;}
+
+    /* =======================================================
+       ATURAN KHUSUS MOBILE (Layar maksimal 768px)
+       ======================================================= */
+    @media (max-width: 768px) {
+      .pricing-grid {
+        display: flex;
+        flex-wrap: wrap;         
+        justify-content: center; 
+        gap: 10px;               
+      }
+
+      .card {
+        width: calc(50% - 5px); /* Membagi layar jadi 2 dikurangi gap */
+        margin: 0;
+      }
+
+      /* Menyesuaikan ukuran font dan padding agar muat di HP (2 kolom) */
+      .card-content {
+        padding: 20px 15px; 
+      }
+      .card-title {
+        font-size: 16px;
+      }
+      .card-subtitle {
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      .price-tag .amount {
+        font-size: 20px;
+      }
+      .feature-list {
+        padding-top: 15px;
+        margin-bottom: 20px;
+      }
+      .feature-list li {
+        font-size: 11px;
+        margin-bottom: 8px;
+        gap: 6px;
+      }
+      .select-btn {
+        padding: 10px;
+        font-size: 13px;
+      }
+      .ribbon {
+        top: 10px;
+        right: -40px;
+        padding: 4px 30px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <img src="logo_tod.png" alt="TOD Kursus Mengemudi" class="brand-logo-small" onerror="this.src='https://via.placeholder.com/60x60?text=TOD'">
+      
+      <span class="brand-text" style="font-size: 16px;">
+        <span style="color: #ff0000; font-weight: bold;">TOD</span> 
+        <span style="color: var(--navy-light);">Kursus Mengemudi</span>
+      </span>
+      
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img src="logo_tod.png" alt="Logo Besar TOD" class="brand-logo-large" onerror="this.style.display='none'">
+    
+    <div class="hero-badge">Pusat Pelatihan Mengemudi Profesional</div>
+    
+    <h1>Mahir Berkendara<br>Bersama <span>TOD</span></h1>
+    <p>Pilih paket kursus yang sesuai dengan kebutuhan Anda. Tersedia pilihan mobil Manual dan Matic dengan instruktur berpengalaman.</p>
+  </header>
+
+  <main class="container">
+    
+    <section class="category-section">
+      <div class="category-header">
+        <img src="calya.png" alt="Mobil Toyota Calya" class="vehicle-img" onerror="this.style.display='none'">
+        <h2>Kelas Manual</h2>
+        <p>Kendaraan Latihan: Toyota Calya</p>
+      </div>
+
+      <h3 class="sub-section-title">Paket Non SIM</h3>
+      <div class="pricing-grid">
+        <div class="card">
+          <div class="ribbon gray">Non SIM</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 1</h3>
+            <div class="card-subtitle">Kursus Manual Dasar</div>
+            <div class="price-tag"><span class="amount">Rp 1.000.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>8 Jam</b></li>
+              <li>4x Pertemuan</li>
+              <li>1x Ptm = 2 Jam</li>
+              <li>Mobil Calya</li>
+            </ul>
+            <button class="select-btn" onclick="bukaModal('Paket 1 (Manual - Non SIM - 8 Jam)')">Pilih Paket 1</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ribbon gray">Non SIM</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 2</h3>
+            <div class="card-subtitle">Kursus Manual Menengah</div>
+            <div class="price-tag"><span class="amount">Rp 1.400.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>12 Jam</b></li>
+              <li>6x Pertemuan</li>
+              <li>1x Ptm = 2 Jam</li>
+              <li>Mobil Calya</li>
+            </ul>
+            <button class="select-btn" onclick="bukaModal('Paket 2 (Manual - Non SIM - 12 Jam)')">Pilih Paket 2</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ribbon gray">Non SIM</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 3</h3>
+            <div class="card-subtitle">Kursus Manual Mahir</div>
+            <div class="price-tag"><span class="amount">Rp 1.800.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>16 Jam</b></li>
+              <li>8x Pertemuan</li>
+              <li>1x Ptm = 2 Jam</li>
+              <li>Mobil Calya</li>
+            </ul>
+            <button class="select-btn" onclick="bukaModal('Paket 3 (Manual - Non SIM - 16 Jam)')">Pilih Paket 3</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title">Paket Plus SIM A</h3>
+      <div class="pricing-grid">
+        <div class="card">
+          <div class="ribbon">+ SIM A</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 4</h3>
+            <div class="card-subtitle">Manual + Bimbel SIM A</div>
+            <div class="price-tag"><span class="amount">Rp 2.350.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>8 Jam</b></li>
+              <li>4x Pertemuan (@ 2 Jam)</li>
+              <li>Mobil Toyota Calya</li>
+              <li><b>Termasuk Bimbel Ujian SIM</b></li>
+            </ul>
+            <button class="select-btn highlight" onclick="bukaModal('Paket 4 (Manual + SIM A - 8 Jam)')">Pilih Paket 4</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ribbon">+ SIM A</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 5</h3>
+            <div class="card-subtitle">Manual + Bimbel SIM A</div>
+            <div class="price-tag"><span class="amount">Rp 2.750.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>12 Jam</b></li>
+              <li>6x Pertemuan (@ 2 Jam)</li>
+              <li>Mobil Toyota Calya</li>
+              <li><b>Termasuk Bimbel Ujian SIM</b></li>
+            </ul>
+            <button class="select-btn highlight" onclick="bukaModal('Paket 5 (Manual + SIM A - 12 Jam)')">Pilih Paket 5</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ribbon">+ SIM A</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 6</h3>
+            <div class="card-subtitle">Manual + Bimbel SIM A</div>
+            <div class="price-tag"><span class="amount">Rp 3.150.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>16 Jam</b></li>
+              <li>8x Pertemuan (@ 2 Jam)</li>
+              <li>Mobil Toyota Calya</li>
+              <li><b>Termasuk Bimbel Ujian SIM</b></li>
+            </ul>
+            <button class="select-btn highlight" onclick="bukaModal('Paket 6 (Manual + SIM A - 16 Jam)')">Pilih Paket 6</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section">
+      <div class="category-header">
+        <img src="terios.png" alt="Mobil Daihatsu Terios" class="vehicle-img" onerror="this.style.display='none'">
+        <h2>Kelas Matic</h2>
+        <p>Kendaraan Latihan: Toyota Rush / Terios</p>
+      </div>
+
+      <div class="pricing-grid" style="justify-content: center; max-width: 800px; margin: 0 auto;">
+        
+        <div class="card">
+          <div class="ribbon green">BIMBEL</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 7</h3>
+            <div class="card-subtitle">Matic + Bimbel Praktik</div>
+            <div class="price-tag"><span class="amount">Rp 2.000.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>10 Jam</b></li>
+              <li>5x Pertemuan (@ 2 Jam)</li>
+              <li>Mobil Matic</li>
+              <li><b>Fokus Bimbel Praktik</b></li>
+            </ul>
+            <button class="select-btn" onclick="bukaModal('Paket 7 (Matic + Bimbel Praktik Ujian SIM A - 10 Jam)')">Pilih Paket 7</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ribbon green">BIMBEL</div>
+          <div class="card-content">
+            <h3 class="card-title">Paket 8</h3>
+            <div class="card-subtitle">Matic + Bimbel Praktik + SIM A</div>
+            <div class="price-tag"><span class="amount">Rp 3.350.000</span></div>
+            <ul class="feature-list">
+              <li>Durasi Total: <b>10 Jam</b></li>
+              <li>5x Pertemuan (@ 2 Jam)</li>
+              <li>Mobil Matic</li>
+              <li><b>Fokus Bimbel Praktik</b></li>
+            </ul>
+            <button class="select-btn highlight" onclick="bukaModal('Paket 8 (Matic + Bimbel Praktik Ujian SIM A - 10 Jam)')">Pilih Paket 8</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Tuban Oto Driving (TOD). Semua hak cipta dilindungi.</p>
+  </footer>
+
+  <div id="formModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal" onclick="tutupModal()">&times;</span>
+      <h3 style="color: var(--navy); margin-bottom:10px;">Pendaftaran TOD</h3>
+      <p id="paketPilihanText" style="color: var(--text-muted); margin-bottom: 20px;">Paket: <b>-</b></p>
+      
+      <div class="input-wrapper">
+        <label for="namaKlien">Nama Lengkap</label>
+        <input type="text" id="namaKlien" placeholder="Masukkan nama Anda" required>
+      </div>
+      
+      <button class="wa-btn" onclick="kirimKeWA()">
+        Lanjutkan ke WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let paketYangDipilih = "";
+    // Nomor HP Klien Baru TOD
+    const nomorAdminWA = "6281235697888"; 
+
+    function bukaModal(namaPaket) {
+      paketYangDipilih = namaPaket;
+      document.getElementById('paketPilihanText').innerHTML = `Paket Pilihan: <b style="color: var(--red-tod);">${namaPaket}</b>`;
+      document.getElementById('formModal').classList.add('active');
+      setTimeout(() => document.getElementById('namaKlien').focus(), 100);
+    }
+
+    function tutupModal() {
+      document.getElementById('formModal').classList.remove('active');
+      document.getElementById('namaKlien').value = "";
+    }
+
+    document.getElementById('formModal').addEventListener('click', function(e) {
+      if (e.target === this) tutupModal();
+    });
+
+    function kirimKeWA() {
+      const nama = document.getElementById('namaKlien').value.trim();
+      if(!nama) {
+        document.getElementById('namaKlien').focus();
+        return;
+      }
+      const pesan = `Halo Admin Tuban Oto Driving (TOD), nama saya *${nama}*. Saya tertarik untuk mendaftar kursus mengemudi mengambil *${paketYangDipilih}*. Mohon informasi lebih lanjut. Terima kasih.`;
+      window.open(`https://wa.me/${nomorAdminWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+      tutupModal();
+    }
+  </script>
+</body>
+</html>
